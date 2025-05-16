@@ -1,0 +1,22 @@
+{% extends 'recipes/base.html' %} {% block title %}Главная - Сайт рецептов{% endblock %} {% block content %}
+<h1 class="title">5 случайных рецептов</h1>
+
+<div class="columns is-multiline">
+    {% for recipe in recipes %}
+    <div class="column is-one-third">
+        <div class="box">
+            <h2 class="subtitle">{{ recipe.title }}</h2>
+            {% if recipe.image %}
+            <figure class="image is-4by3">
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+            </figure>
+            {% endif %}
+            <p>{{ recipe.description|truncatechars:100 }}</p>
+            <a href="{% url 'recipe_detail' recipe.pk %}">Подробнее</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Рецептов пока нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}
