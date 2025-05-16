@@ -3,7 +3,10 @@ services:
     name: recipe-site
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py migrate
+      python manage.py collectstatic --noinput
     startCommand: gunicorn recipe_site.wsgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
