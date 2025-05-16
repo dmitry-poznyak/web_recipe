@@ -4,6 +4,9 @@ __pycache__/
 *.sqlite3
 *.log
 
+.env
+
+
 # Environments
 env/
 venv/
@@ -24,3 +27,6 @@ ENV/
 db.sqlite3
 media/
 staticfiles/
+render/
+
+/.render/
