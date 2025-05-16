@@ -1,6 +1,12 @@
 from pathlib import Path
 import os
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from cloudinary_storage.storage import MediaCloudinaryStorage
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,6 +14,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['web-recipe.onrender.com', 'localhost', '127.0.0.1']
+
+cloudinary.config( 
+  cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'), 
+  api_key = os.environ.get('CLOUDINARY_API_KEY'), 
+  api_secret = os.environ.get('CLOUDINARY_API_SECRET') 
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -17,6 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'recipes',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
