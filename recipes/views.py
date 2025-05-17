@@ -33,7 +33,7 @@ def recipe_create(request):
 def recipe_edit(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     if recipe.author != request.user:
-        return redirect('recipe_detail', pk=pk)  # нельзя редактировать чужие рецепты
+        return redirect('recipe_detail', pk=pk)
     if request.method == 'POST':
         form = RecipeForm(request.POST, request.FILES, instance=recipe)
         if form.is_valid():
