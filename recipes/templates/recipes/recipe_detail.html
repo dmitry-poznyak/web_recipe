@@ -1,25 +1,28 @@
 {% extends 'recipes/base.html' %} {% block title %}{{ recipe.title }} - Рецепт{% endblock %} {% block content %}
-<h1 class="title">{{ recipe.title }}</h1>
+<h1 class="mb-3">{{ recipe.title }}</h1>
 <p><strong>Автор:</strong> {{ recipe.author.username }}</p>
 <p><strong>Время приготовления:</strong> {{ recipe.prep_time }} минут</p>
 
 {% if recipe.image %}
-<figure class="image is-4by3">
-    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+<figure class="mb-3">
+    <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid rounded">
 </figure>
 {% endif %}
 
-<h2 class="subtitle">Описание</h2>
+<h2>Описание</h2>
 <p>{{ recipe.description }}</p>
 
-<h2 class="subtitle">Шаги приготовления</h2>
+<h2>Шаги приготовления</h2>
 <p style="white-space: pre-line;">{{ recipe.steps }}</p>
 
 {% if user == recipe.author %}
-<p>
-    <a class="button is-info" href="{% url 'recipe_edit' recipe.pk %}">Редактировать рецепт</a>
-    <a class="btn btn-danger" href="{% url 'recipe_delete' recipe.pk %}">Удалить рецепт</a>
-</p>
+<div class="mt-4">
+    <a class="btn btn-info me-2" href="{% url 'recipe_edit' recipe.pk %}">Редактировать</a>
+    <form action="{% url 'recipe_delete' recipe.pk %}" method="post" class="d-inline">
+        {% csrf_token %}
+        <button class="btn btn-danger" type="submit" onclick="return confirm('Удалить рецепт?')">Удалить</button>
+    </form>
+</div>
 {% endif %}
 
-<a href="{% url 'home' %}">← Вернуться на главную</a> {% endblock %}
+<a href="{% url 'home' %}" class="d-block mt-4">← Вернуться на главную</a> {% endblock %}

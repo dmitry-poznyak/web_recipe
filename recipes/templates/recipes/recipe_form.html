@@ -1,10 +1,9 @@
 {% extends 'recipes/base.html' %} {% block title %}Добавить/Редактировать рецепт{% endblock %} {% block content %}
-<h1 class="title">Добавить/Редактировать рецепт</h1>
+<h1 class="mb-4">Добавить/Редактировать рецепт</h1>
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" class="w-75 mx-auto">
     {% csrf_token %} {{ form.as_p }}
-
-    <button class="button is-primary" type="submit">Сохранить</button>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
 </form>
 
-<a href="{% url 'home' %}">← Назад</a> {% endblock %}
+<a href="{% url 'home' %}" class="d-block mt-3">← Назад</a> {% endblock %}
