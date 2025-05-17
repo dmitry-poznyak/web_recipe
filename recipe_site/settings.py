@@ -6,9 +6,13 @@ import cloudinary.uploader
 import cloudinary.api
 from cloudinary_storage.storage import MediaCloudinaryStorage
 from cloudinary_storage.storage import RawMediaCloudinaryStorage
+from dotenv import load_dotenv
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
@@ -24,6 +28,13 @@ cloudinary.config(
   api_key = os.environ.get('CLOUDINARY_API_KEY'), 
   api_secret = os.environ.get('CLOUDINARY_API_SECRET') 
 )
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
