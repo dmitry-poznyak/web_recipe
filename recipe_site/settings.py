@@ -13,7 +13,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
+
 ALLOWED_HOSTS = ['web-recipe.onrender.com', 'localhost', '127.0.0.1']
+
+
 
 cloudinary.config( 
   cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'), 

@@ -42,6 +42,18 @@ def recipe_edit(request, pk):
         form = RecipeForm(instance=recipe)
     return render(request, 'recipes/recipe_form.html', {'form': form})
 
+@login_required
+def recipe_delete(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    if recipe.author != request.user:
+        return redirect('recipe_detail', pk=pk)
+    
+    if request.method == 'POST':
+        recipe.delete()
+        return redirect('home')
+    
+    return render(request, 'recipes/recipe_confirm_delete.html', {'recipe': recipe})
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -67,3 +79,4 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+

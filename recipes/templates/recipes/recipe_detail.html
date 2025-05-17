@@ -18,6 +18,7 @@
 {% if user == recipe.author %}
 <p>
     <a class="button is-info" href="{% url 'recipe_edit' recipe.pk %}">Редактировать рецепт</a>
+    <a class="btn btn-danger" href="{% url 'recipe_delete' recipe.pk %}">Удалить рецепт</a>
 </p>
 {% endif %}
 
