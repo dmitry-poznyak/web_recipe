@@ -1,9 +1,20 @@
-{% extends 'recipes/base.html' %} {% block title %}Добавить/Редактировать рецепт{% endblock %} {% block content %}
-<h1 class="mb-4">Добавить/Редактировать рецепт</h1>
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">{% if form.instance.pk %}Редактировать рецепт{% else %}Добавить рецепт{% endif %}</h2>
 
-<form method="post" enctype="multipart/form-data" class="w-75 mx-auto">
-    {% csrf_token %} {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Сохранить</button>
-</form>
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %} {% for field in form %}
+        <div class="mb-3">
+            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label> {{ field }} {% if field.help_text %}
+            <div class="form-text">{{ field.help_text }}</div>
+            {% endif %} {% for error in field.errors %}
+            <div class="text-danger small">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endfor %}
 
-<a href="{% url 'home' %}" class="d-block mt-3">← Назад</a> {% endblock %}
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}

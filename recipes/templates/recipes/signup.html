@@ -2,10 +2,10 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <h1 class="mb-4">Регистрация</h1>
-        <form method="post">
-            {% csrf_token %} {{ form.non_field_errors }} {% for field in form %}
+        <form method="post" novalidate>
+            {% csrf_token %} {% for field in form %}
             <div class="mb-3">
-                <label class="form-label">{{ field.label }}</label> {{ field }} {% if field.errors %}
+                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label> {{ field.as_widget(attrs={'class': 'form-control'}) }} {% if field.errors %}
                 <div class="text-danger">{{ field.errors|striptags }}</div>
                 {% endif %}
             </div>
