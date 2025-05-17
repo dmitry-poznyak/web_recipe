@@ -1,7 +1,7 @@
 {% extends 'recipes/base.html' %} {% block content %}
 <div class="container mt-5">
     <h2>Регистрация</h2>
-    <form method="post">
+    <form method="post" style="max-width: 400px;">
         {% csrf_token %} {{ form.non_field_errors }} {% for field in form %}
         <div class="mb-3">
             {{ field.label_tag }} {{ field }} {{ field.errors }}
